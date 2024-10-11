@@ -37,6 +37,13 @@ void write_output(const char* filename, int* lis, int lis_length) {
     fclose(file);
 }
 
+void print_tab(int *tab, int sizeOfTab){
+    for (int i = 0; i < sizeOfTab; i++){
+        printf("element %i : %i", i, *(++tab));
+    }
+}
+
+
 void empty_tab(int *tab, int sizeOfTab)
 {
     for (int i = 0; i < sizeOfTab; i++){
