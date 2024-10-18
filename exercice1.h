@@ -1,4 +1,4 @@
 
 void exercice1();
-void question1();
-//void question2();
+void question1_1();
+void question1_bis();
