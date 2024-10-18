@@ -5,6 +5,7 @@
         "stdlib.h": "c",
         "exercice1.h": "c",
         "exercice2.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "exercice3.h": "c"
     }
 }

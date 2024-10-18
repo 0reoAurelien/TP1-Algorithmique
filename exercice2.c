@@ -49,9 +49,11 @@ void question2_1(){
     // Construire et afficher le résultat
     int resSize = aSize - bestDepth; 
     int res[resSize];
-
+    
+    
     int removedIndex; // Variable pour vérifier si l'indice est un élément retiré ou non
     int count = 0; // Indice pour écrire les valeurs dans res
+    /*
     for (int i = 0; i < aSize; i++){
         removedIndex = 0;
         for (int j = 0; j < bestDepth; j++){
@@ -62,12 +64,14 @@ void question2_1(){
         }
         if (!removedIndex){
             res[count] = A[i];
+            printf("%d ", res[count]);
             count++;
         }
     }
-    
+    */
+
     // Écrire les résultats dans le fichier OUTDIVSEQ.txt
-    write_output_ex2("OUTDIVSEQ.txt", res, resSize);
+    write_output_ex2("OUTDIVSEQ.txt", A, aSize, bestRemovedIndexList, bestDepth, resSize);
 
     return;
 }

@@ -11,6 +11,7 @@ void exercice1(){
 void question1_1() {
     int A[MAX_N];
     int aSize;
+    int indexTable[MAX_N];
 
     // Lire les valeurs du tableau A depuis le fichier INPMONOSEQ.txt
     read_input_ex1("INPMONOSEQ.txt", A, &aSize);
@@ -56,11 +57,12 @@ void question1_1() {
 
     while (currentIndex != -1) {
         lis[k] = A[currentIndex];
+        indexTable[k] = currentIndex;
         k--;
         currentIndex = previous[currentIndex];
     }
 
     // Écrire les résultats dans le fichier OUTMONOSEQ.TXT
-    write_output_ex1("OUTMONOSEQ.txt", lis, maxLength);
+    write_output_ex1("OUTMONOSEQ.txt", lis, maxLength, indexTable);
 }
 
