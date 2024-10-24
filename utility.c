@@ -73,12 +73,12 @@ void read_input_adjacency_list(const char* filename, int *adjList, int* n, int* 
 
     
     // Initialiser les listes d'adjacence à NULL
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < *n; i++) {
         adjList[i] = NULL;
     }
 
     // Lecture des arêtes
-    for (int i = 0; i < m; i++) {
+    for (int i = 0; i < *m; i++) {
         int u;
         int v;
         fscanf(file, "%d %d", &u, &v);

@@ -49,7 +49,7 @@ void question3_2(){ // Avec la liste d'adjacence
     int n;
     int m;
 
-    read_input_adjacency_matrix("INPARBGRAPH.txt", adjList, &n, &m);
+    read_input_adjacency_list("INPARBGRAPH.txt", adjList, &n, &m);
 
     // Structure pour l'Union-Find
     int parent[MAX];
