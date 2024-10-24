@@ -9,7 +9,7 @@ typedef struct Node {
 void read_input_ex1(const char* filename, int* sequence, int* n);
 void read_input_ex2(const char* filename, int* sequence, int* n, int* k);
 void read_input_adjacency_matrix(const char* filename, int adjMatrix[MAX][MAX], int* n, int* m);
-void read_input_adjacency_list(const char* filename, int *adjList, int* n, int* m);
+void read_input_adjacency_list(const char* filename, Node *adjList[MAX], int* n, int* m);
 void read_input_ex5(const char* filename, int* sequence, int* n, int* k);
 
 

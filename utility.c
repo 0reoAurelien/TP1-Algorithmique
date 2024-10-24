@@ -62,7 +62,7 @@ void read_input_adjacency_matrix(const char* filename, int adjMatrix[MAX][MAX], 
 
 
 // Lecture des données depuis un fichier (exercice 2) pour une liste d'adjacence
-void read_input_adjacency_list(const char* filename, int *adjList, int* n, int* m) {
+void read_input_adjacency_list(const char* filename, Node *adjList[MAX], int* n, int* m) {
     FILE* file = fopen(filename, "r");
     if (!file) {
         printf("Erreur lors de l'ouverture du fichier %s\n", filename);
