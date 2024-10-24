@@ -11,6 +11,7 @@
                 "${workspaceFolder}/exercice1.c",
                 "${workspaceFolder}/exercice2.c",
                 "${workspaceFolder}/exercice3.c",
+                "${workspaceFolder}/exercice4.c",
                 "${workspaceFolder}/utility.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"

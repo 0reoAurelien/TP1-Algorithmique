@@ -3,6 +3,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
+
 // Lecture des données depuis un fichier (exercice 1)
 void read_input_ex1(const char* filename, int* sequence, int* n) {
     FILE* file = fopen(filename, "r");
@@ -18,6 +19,7 @@ void read_input_ex1(const char* filename, int* sequence, int* n) {
 
     fclose(file);
 }
+
 
 // Lecture des données depuis un fichier (exercice 2)
 void read_input_ex2(const char* filename, int* sequence, int* n, int* k) {
@@ -35,6 +37,58 @@ void read_input_ex2(const char* filename, int* sequence, int* n, int* k) {
 
     fclose(file);
 }
+
+
+// Lecture des données depuis un fichier (exercice 2) pour une matricce d'adjacence
+void read_input_adjacency_matrix(const char* filename, int adjMatrix[MAX][MAX], int* n, int* m) {
+    FILE* file = fopen(filename, "r");
+    if (!file) {
+        printf("Erreur lors de l'ouverture du fichier %s\n", filename);
+        exit(EXIT_FAILURE);
+    }
+
+    fscanf(file, "%d %d", n, m);
+
+    // Lecture des arêtes
+    for (int i = 0; i < *m; i++) {
+        int u, v;
+        fscanf(file, "%d %d", &u, &v);
+        adjMatrix[u - 1][v - 1] = 1;
+        adjMatrix[v - 1][u - 1] = 1; // Graphe non orienté
+    }
+
+    fclose(file);
+}
+
+
+// Lecture des données depuis un fichier (exercice 2) pour une liste d'adjacence
+void read_input_adjacency_list(const char* filename, int *adjList, int* n, int* m) {
+    FILE* file = fopen(filename, "r");
+    if (!file) {
+        printf("Erreur lors de l'ouverture du fichier %s\n", filename);
+        exit(EXIT_FAILURE);
+    }
+
+    fscanf(file, "%d %d", n, m);
+
+    
+    // Initialiser les listes d'adjacence à NULL
+    for (int i = 0; i < n; i++) {
+        adjList[i] = NULL;
+    }
+
+    // Lecture des arêtes
+    for (int i = 0; i < m; i++) {
+        int u;
+        int v;
+        fscanf(file, "%d %d", &u, &v);
+        addEdgeToList(u - 1, v - 1, &adjList[u]); // Graphe non orienté
+        addEdgeToList(v - 1, u - 1, &adjList[u]);
+    }
+
+    fclose(file);
+}
+
 
 // Écriture des résultats dans un fichier (exercice 1)
 void write_output_ex1(const char* filename, int* lis, int lis_length, int* indexTable) {
@@ -90,6 +144,20 @@ void write_output_ex2(const char* filename, int* A, int aSize, int* bestRemovedI
 }
 
 
+void write_output_ex3(const char *filename, int *res, int resSize)
+{
+    FILE *file = fopen(filename, "w");
+    if (!file) {
+        printf("Erreur lors de l'ouverture du fichier %s\n", filename);
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < resSize/2; i++)
+        fprintf(file, "%d %d\n", res[2*i], res[2*i+1]); // Écrire les arêtes de l'arbre couvrant
+    fclose(file);
+}
+
+
 void print_tab(int *tab, int sizeOfTab){
     for (int i = 0; i < sizeOfTab; i++){
         printf("element %i : %i", i, *(++tab));
@@ -103,3 +171,48 @@ void empty_tab(int *tab, int sizeOfTab)
         //popen(tab);
     }
 }
+
+
+void addEdgeToList(int u, int v, Node** adjListPosition) {
+    Node* newNode = (Node*) malloc(sizeof(Node));
+    newNode->vertex = v;
+    newNode->next = *adjListPosition;
+    *adjListPosition = newNode;
+}
+
+
+void freeAdjList(Node** adjList, int n) {
+    for (int i = 0; i < n; i++) {
+        Node* current = adjList[i];
+        while (current != NULL) {
+            Node* temp = current;
+            current = current->next;
+            free(temp);
+        }
+    }
+}
+
+
+int find(int x, int* parent) {
+    if (parent[x] != x) {
+        parent[x] = find(parent[x], parent);
+    }
+    return parent[x];
+}
+
+
+void unionSets(int x, int y, int* parent) {
+    int rootX = find(x, parent);
+    int rootY = find(y, parent);
+    if (rootX != rootY) {
+        parent[rootX] = rootY;
+    }
+}
+
+
+void makeSet(int n, int* parent) {
+    for (int i = 0; i < n; i++) {
+        parent[i] = i;
+    }
+}
+
