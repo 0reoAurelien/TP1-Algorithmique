@@ -6,6 +6,8 @@
         "exercice1.h": "c",
         "exercice2.h": "c",
         "string.h": "c",
-        "exercice3.h": "c"
+        "exercice3.h": "c",
+        "limits": "c",
+        "exercice5.h": "c"
     }
 }

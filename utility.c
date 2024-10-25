@@ -96,6 +96,37 @@ void read_input_adjacency_list(const char* filename, Node *adjList[MAX], int* n,
 }
 
 
+// Lecture des données depuis un fichier (exercice 2) pour une matricce d'adjacence
+void read_input_adjacency_matrix_ex5(const char* filename, int adjMatrix[MAX][MAX], int* n, int* m, int* start, int* end) {
+    FILE* file = fopen(filename, "r");
+    if (!file) {
+        printf("Erreur lors de l'ouverture du fichier %s\n", filename);
+        exit(EXIT_FAILURE);
+    }
+
+    fscanf(file, "%d %d %d %d", n, m, start, end);
+    (*start)--;  // Ajuster les indices pour démarrer à 0
+    (*end)--;
+
+    // Initialiser la matrice avec des valeurs infinies
+    for (int i = 0; i < *n; i++) {
+        for (int j = 0; j < *n; j++) {
+            adjMatrix[i][j] = (i == j) ? 0 : MAX;
+        }
+    }
+
+    // Lecture des arêtes et poids
+    for (int i = 0; i < *m; i++) {
+        int u, v, weight;
+        fscanf(file, "%d %d %d", &u, &v, &weight);
+        adjMatrix[u - 1][v - 1] = weight;
+        adjMatrix[v - 1][u - 1] = weight;  // Graphe non orienté
+    }
+
+    fclose(file);
+}
+
+
 // Écriture des résultats dans un fichier (exercice 1)
 void write_output_ex1(const char* filename, int* lis, int lis_length, int* indexTable) {
     FILE* file = fopen(filename, "w");
@@ -183,10 +214,22 @@ void write_output_ex4(const char* filename, int components[MAX][MAX], int compon
 }
 
 
-void print_tab(int *tab, int sizeOfTab){
-    for (int i = 0; i < sizeOfTab; i++){
-        printf("element %i : %i", i, *(++tab));
+// Écriture du résultat dans le fichier
+void write_output_ex5(const char* filename, int distance, int path[], int pathSize) {
+    FILE* file = fopen(filename, "w");
+    if (!file) {
+        printf("Erreur lors de l'ouverture du fichier %s\n", filename);
+        exit(EXIT_FAILURE);
     }
+
+    fprintf(file, "%d\n", distance);  // Écrire la distance
+    for (int i = 0; i < pathSize; i++) {
+        fprintf(file, "%d", path[i] + 1);  // Revenir aux indices de départ
+        if (i < pathSize - 1) fprintf(file, " -> ");
+    }
+    fprintf(file, "\n");
+
+    fclose(file);
 }
 
 
