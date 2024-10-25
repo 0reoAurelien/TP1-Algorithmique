@@ -10,7 +10,7 @@ int main(){
     exercice1();
     exercice2();
     exercice3();
-    //exercice4();
+    exercice4();
     printf("Les résultats des exercices sont écrits dans les fichiers OUT*.txt\n\n");
     return 0;
 

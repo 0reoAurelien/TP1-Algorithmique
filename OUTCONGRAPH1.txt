@@ -1,0 +1,5 @@
+2
+Composante connexe 1:
+1 2 
+Composante connexe 2:
+3 4 5 

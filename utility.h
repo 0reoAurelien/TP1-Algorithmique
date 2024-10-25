@@ -24,5 +24,4 @@ void freeAdjList(Node** adjList, int n);
 void write_output_ex1(const char* filename, int* lis, int lis_length, int* indexTable);
 void write_output_ex2(const char* filename, int* A, int aSize, int* bestRemovedIndexList, int bestDepth, int resSize);
 void write_output_ex3(const char* filename, int* res, int resSize);
-void write_output_ex4();
-void empty_tab(int* tab, int sizeOfTab);
+void write_output_ex4(const char* filename, int components[MAX][MAX], int componentSizes[MAX], int k);

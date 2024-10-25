@@ -71,7 +71,6 @@ void read_input_adjacency_list(const char* filename, Node *adjList[MAX], int* n,
 
     fscanf(file, "%d %d", n, m);
 
-    
     // Initialiser les listes d'adjacence à NULL
     for (int i = 0; i < *n; i++) {
         adjList[i] = NULL;
@@ -79,11 +78,18 @@ void read_input_adjacency_list(const char* filename, Node *adjList[MAX], int* n,
 
     // Lecture des arêtes
     for (int i = 0; i < *m; i++) {
-        int u;
-        int v;
+        int u, v;
         fscanf(file, "%d %d", &u, &v);
-        addEdgeToList(u - 1, v - 1, &adjList[u]); // Graphe non orienté
-        addEdgeToList(v - 1, u - 1, &adjList[u]);
+
+        // Ajustement des indices pour démarrer à 0
+        u -= 1;
+        v -= 1;
+
+        // Ajouter `v` dans la liste d'adjacence de `u`
+        addEdgeToList(u, v, &adjList[u]);
+
+        // Ajouter `u` dans la liste d'adjacence de `v` (graphe non orienté)
+        addEdgeToList(v, u, &adjList[v]);
     }
 
     fclose(file);
@@ -158,17 +164,28 @@ void write_output_ex3(const char *filename, int *res, int resSize)
 }
 
 
-void print_tab(int *tab, int sizeOfTab){
-    for (int i = 0; i < sizeOfTab; i++){
-        printf("element %i : %i", i, *(++tab));
+void write_output_ex4(const char* filename, int components[MAX][MAX], int componentSizes[MAX], int k)
+{
+    FILE* file = fopen(filename, "w");
+    if (!file) {
+        perror("Erreur d'ouverture du fichier");
+        exit(1);
     }
+    fprintf(file, "%d\n", k); // Nombre de composantes
+    for (int i = 0; i < k; i++) {
+        fprintf(file, "Composante connexe %d:\n", i + 1);
+        for (int j = 0; j < componentSizes[i]; j++) {
+            fprintf(file, "%d ", components[i][j]);
+        }
+        fprintf(file, "\n");
+    }
+    fclose(file);
 }
 
 
-void empty_tab(int *tab, int sizeOfTab)
-{
+void print_tab(int *tab, int sizeOfTab){
     for (int i = 0; i < sizeOfTab; i++){
-        //popen(tab);
+        printf("element %i : %i", i, *(++tab));
     }
 }
 
